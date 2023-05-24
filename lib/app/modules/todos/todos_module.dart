@@ -1,13 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'modules/todos/todos_module.dart';
+import 'pages/todos_page.dart';
 
-class AppModule extends Module {
+class TodoModule extends Module {
   @override
   List<Bind> get binds => [];
 
   @override
   List<ModularRoute> get routes => [
-        ModuleRoute('/todo', module: TodoModule()),
+        ChildRoute('/', child: (_, args) => const TodosPage()),
       ];
 }
