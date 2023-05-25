@@ -42,21 +42,60 @@ class _TodosPageState extends State<TodosPage> {
                   ],
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
-                    color: primaryColor,
+                    color: secondaryColor,
                   ),
                 ),
               ),
-              const Expanded(
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
                 child: TabBarView(children: [
-                  Text('1'),
-                  Text('2'),
-                  Text('3'),
+                  ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Checkbox(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                  4,
+                                ),
+                              ),
+                            ),
+                            fillColor: MaterialStateColor.resolveWith(
+                                (states) => secondaryColor),
+                            value: true,
+                            onChanged: (value) {}),
+                        title: const Text('Teste'),
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Checkbox(value: true, onChanged: (value) {}),
+                        title: const Text('Teste'),
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Checkbox(value: true, onChanged: (value) {}),
+                        title: const Text('Teste'),
+                      );
+                    },
+                  ),
                 ]),
               )
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: primaryColor,
           onPressed: () {},
           child: const Icon(Icons.add),
         ),
