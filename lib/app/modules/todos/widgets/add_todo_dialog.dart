@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/modules/todos/models/todo_model.dart';
+import 'package:todo_app/core/colors.dart';
 
+import '../../../../core/widgets/elevated_button_todo_app.dart';
 import '../blocs/todo_bloc.dart';
 import '../blocs/todo_events.dart';
 
@@ -17,7 +19,7 @@ class AddTodoDialog extends StatelessWidget {
         controller: todo,
       ),
       actions: [
-        ElevatedButton(
+        ElevatedButtonTodoApp(
           onPressed: () {
             bloc.add(
               AddTodoEvent(
@@ -30,14 +32,14 @@ class AddTodoDialog extends StatelessWidget {
             todo.clear();
             Navigator.pop(context);
           },
-          child: const Text('Add'),
+          text: 'Add',
         ),
-        ElevatedButton(
+        ElevatedButtonTodoApp(
           onPressed: () {
             todo.clear();
             Navigator.pop(context);
           },
-          child: const Text('Cancel'),
+          text: 'Cancel',
         ),
       ],
     );
