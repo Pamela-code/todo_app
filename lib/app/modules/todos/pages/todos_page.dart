@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:todo_app/app/modules/todos/widgets/all_todos_list.dart';
+import 'package:todo_app/app/modules/todos/widgets/done_todos_list.dart';
+import 'package:todo_app/app/modules/todos/widgets/pending_todos_list.dart';
 
 import '../../../../core/colors.dart';
 import '../blocs/todo_bloc.dart';
-import '../blocs/todo_events.dart';
-import '../blocs/todo_state.dart';
 import '../widgets/add_todo_dialog.dart';
 
 class TodosPage extends StatefulWidget {
@@ -69,77 +69,14 @@ class _TodosPageState extends State<TodosPage> {
               const SizedBox(
                 height: 10,
               ),
-              Expanded(
-                child: BlocBuilder<TodoBloc, TodoState>(
-                    bloc: bloc,
-                    builder: (context, state) {
-                      if (state is TodoListInitialState) {
-                        return const Center(
-                          child: Text('Add a Todo'),
-                        );
-                      } else if (state is TodoSuccessState) {
-                        return TabBarView(
-                          children: [
-                            ListView.builder(
-                              itemCount: 5,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  leading: Checkbox(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                            4,
-                                          ),
-                                        ),
-                                      ),
-                                      fillColor: MaterialStateColor.resolveWith(
-                                          (states) => secondaryColor),
-                                      value: true,
-                                      onChanged: (value) {}),
-                                  title: const Text('Teste'),
-                                );
-                              },
-                            ),
-                            ListView.builder(
-                              itemCount: state.todos.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  leading: Checkbox(
-                                    value: true,
-                                    onChanged: (value) {},
-                                  ),
-                                  title: Text(state.todos[index].description),
-                                  trailing: IconButton(
-                                    icon: const Icon(
-                                      Icons.close,
-                                    ),
-                                    onPressed: () {
-                                      bloc.add(
-                                        RemoveTodoEvent(
-                                          todo: state.todos[index],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                            ListView.builder(
-                              itemCount: 5,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  leading: Checkbox(
-                                      value: true, onChanged: (value) {}),
-                                  title: const Text('Teste'),
-                                );
-                              },
-                            ),
-                          ],
-                        );
-                      }
-                      return const SizedBox();
-                    }),
+              const Expanded(
+                child: TabBarView(
+                  children: [
+                    AllTodosList(),
+                    PendingTodosList(),
+                    DoneTodosList()
+                  ],
+                ),
               )
             ],
           ),
