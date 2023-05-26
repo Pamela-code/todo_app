@@ -1,7 +1,9 @@
+import '../models/todo_model.dart';
+
 abstract class TodoEvent {}
 
 class AddTodoEvent extends TodoEvent {
-  String todo;
+  TodoModel todo;
 
   AddTodoEvent({
     required this.todo,
@@ -9,7 +11,7 @@ class AddTodoEvent extends TodoEvent {
 }
 
 class RemoveTodoEvent extends TodoEvent {
-  String todo;
+  TodoModel todo;
 
   RemoveTodoEvent({
     required this.todo,

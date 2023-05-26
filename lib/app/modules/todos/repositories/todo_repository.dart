@@ -1,12 +1,14 @@
-class TodoRepository {
-  final List<String> _todos = [];
+import '../models/todo_model.dart';
 
-  List<String> addTodo(String todo) {
+class TodoRepository {
+  final List<TodoModel> _todos = [];
+
+  List<TodoModel> addTodo(TodoModel todo) {
     _todos.add(todo);
     return _todos;
   }
 
-  List<String> removeTodo(String todo) {
+  List<TodoModel> removeTodo(TodoModel todo) {
     _todos.remove(todo);
     return _todos;
   }
