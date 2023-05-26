@@ -17,5 +17,10 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       (event, emit) =>
           emit(TodoSuccessState(todos: _todoRepo.removeTodo(event.todo))),
     );
+
+    on<ChangeStatusTodoEvent>(
+      (event, emit) => emit(TodoSuccessState(
+          todos: _todoRepo.changeTodoStatus(event.todo, event.index))),
+    );
   }
 }

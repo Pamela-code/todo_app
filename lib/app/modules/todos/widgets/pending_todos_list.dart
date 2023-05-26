@@ -37,17 +37,28 @@ class _PendingTodosListState extends State<PendingTodosList> {
             itemCount: state.todos.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return ListTileTodosApp(
-                done: true,
-                todoDescription: state.todos[index].description,
-                deleteOnPressed: () {
-                  bloc.add(
-                    RemoveTodoEvent(
-                      todo: state.todos[index],
-                    ),
-                  );
-                },
-              );
+              if (state.todos[index].done == false) {
+                return ListTileTodosApp(
+                  checkOnPressed: () {
+                    bloc.add(
+                      ChangeStatusTodoEvent(
+                        todo: state.todos[index],
+                        index: index,
+                      ),
+                    );
+                  },
+                  done: state.todos[index].done,
+                  todoDescription: state.todos[index].description,
+                  deleteOnPressed: () {
+                    bloc.add(
+                      RemoveTodoEvent(
+                        todo: state.todos[index],
+                      ),
+                    );
+                  },
+                );
+              }
+              return const SizedBox();
             },
           );
         }

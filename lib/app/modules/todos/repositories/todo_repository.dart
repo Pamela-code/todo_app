@@ -12,4 +12,9 @@ class TodoRepository {
     _todos.remove(todo);
     return _todos;
   }
+
+  List<TodoModel> changeTodoStatus(TodoModel todo, int index) {
+    _todos[index].done = !_todos[index].done;
+    return _todos;
+  }
 }

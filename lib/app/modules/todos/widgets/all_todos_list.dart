@@ -38,8 +38,16 @@ class _AllTodosListState extends State<AllTodosList> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ListTileTodosApp(
-                done: true,
+                done: state.todos[index].done,
                 todoDescription: state.todos[index].description,
+                checkOnPressed: () {
+                  bloc.add(
+                    ChangeStatusTodoEvent(
+                      todo: state.todos[index],
+                      index: index,
+                    ),
+                  );
+                },
                 deleteOnPressed: () {
                   bloc.add(
                     RemoveTodoEvent(

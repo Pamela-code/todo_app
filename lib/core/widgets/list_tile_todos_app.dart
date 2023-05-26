@@ -6,8 +6,8 @@ import '../colors.dart';
 class ListTileTodosApp extends StatefulWidget {
   const ListTileTodosApp({
     Key? key,
-    this.deleteOnPressed,
-    this.checkOnPressed,
+    required this.deleteOnPressed,
+    required this.checkOnPressed,
     required this.done,
     required this.todoDescription,
   }) : super(key: key);
@@ -35,7 +35,7 @@ class _ListTileTodosAppState extends State<ListTileTodosApp> {
         ),
         value: widget.done,
         onChanged: (x) {
-          widget.checkOnPressed;
+          widget.checkOnPressed!();
         },
       ),
       title: Text(widget.todoDescription),
