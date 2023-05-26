@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../core/widgets/list_tile_todos_app.dart';
 import '../blocs/todo_bloc.dart';
 import '../blocs/todo_events.dart';
 import '../blocs/todo_state.dart';
@@ -36,24 +37,16 @@ class _DoneTodosListState extends State<DoneTodosList> {
             itemCount: state.todos.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return ListTile(
-                leading: Checkbox(
-                  value: true,
-                  onChanged: (value) {},
-                ),
-                title: Text(state.todos[index].description),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                  ),
-                  onPressed: () {
-                    bloc.add(
-                      RemoveTodoEvent(
-                        todo: state.todos[index],
-                      ),
-                    );
-                  },
-                ),
+              return ListTileTodosApp(
+                done: true,
+                todoDescription: state.todos[index].description,
+                deleteOnPressed: () {
+                  bloc.add(
+                    RemoveTodoEvent(
+                      todo: state.todos[index],
+                    ),
+                  );
+                },
               );
             },
           );
